@@ -5,7 +5,6 @@ import NavBar from './components/layout/NavBar';
 function App() {
   return (
     <Router className="app">
-      <h3>github finder</h3>
       <div className="flex flex-col justify-between h-screen">
       <NavBar/>
       <main>Content</main>
