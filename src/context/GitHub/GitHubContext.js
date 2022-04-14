@@ -4,6 +4,7 @@ import GithubReducer from "./GithubReducer";
 //import { createContext, useState } from "react";
 const GitHubContext = createContext();
 const GITHUB_URL = process.env.REACT_APP_GIT_URL;
+const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 export const GithubProvider = ({ children }) => {
   // const [users, setUsers] = useState([]);
@@ -26,7 +27,9 @@ export const GithubProvider = ({ children }) => {
       q: text,
     });
 
-    const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {});
+    const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
+      headers: { Authorization: `token ${GITHUB_TOKEN}` },
+    });
 
     const { items } = await response.json();
     // setUsers(data);
@@ -41,7 +44,9 @@ export const GithubProvider = ({ children }) => {
   const getUser = async (login) => {
     setLoading();
 
-    const response = await fetch(`${GITHUB_URL}/users/${login}`, {});
+    const response = await fetch(`${GITHUB_URL}/users/${login}`, {
+      headers: { Authorization: `token ${GITHUB_TOKEN}` },
+    });
     if (response.status === 404) {
       window.location = "/notfound";
     } else {
@@ -57,11 +62,7 @@ export const GithubProvider = ({ children }) => {
   const getUserRepos = async (login) => {
     setLoading();
 
-    const response = await fetch(
-      `${GITHUB_URL}/
-    users?${login}/repos`,
-      {}
-    );
+    const response = await fetch(`${GITHUB_URL}/users/${login}/repos`, {});
 
     const data = await response.json();
     // setUsers(data);
