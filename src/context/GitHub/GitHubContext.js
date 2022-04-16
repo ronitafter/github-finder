@@ -44,7 +44,7 @@ export const GithubProvider = ({ children }) => {
   const getUser = async (login) => {
     setLoading();
 
-    const response = await fetch(`${GITHUB_URL}/users?${login}`, {
+    const response = await fetch(`${GITHUB_URL}/users/${login}`, {
       headers: { Authorization: `token ${GITHUB_TOKEN}` },
     });
     if (response.status === 404) {
@@ -68,7 +68,7 @@ export const GithubProvider = ({ children }) => {
     });
 
     const response = await fetch(
-      `${GITHUB_URL}/users?${login}/repos?${params}`,
+      `${GITHUB_URL}/users/${login}/repos${params}`,
       {}
     );
 
