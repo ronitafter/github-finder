@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+git rm env.local --cached
+git rm env.staging --cached
